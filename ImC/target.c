@@ -9,19 +9,19 @@ void power_on_init()
     PM5CTL0 &= ~LOCKLPM5;       // Disable the GPIO power-on default high-impedance mode
 
     /* Terminate all GPIO pins to Output LOW to minimize power consumption */
-    GPIO_setAsOutputPin(GPIO_PORT_PA, GPIO_PIN_ALL16);
-    GPIO_setAsOutputPin(GPIO_PORT_PB, GPIO_PIN_ALL16);
-    GPIO_setAsOutputPin(GPIO_PORT_PC, GPIO_PIN_ALL16);
-    GPIO_setAsOutputPin(GPIO_PORT_PD, GPIO_PIN_ALL16);
-    GPIO_setAsOutputPin(GPIO_PORT_PE, GPIO_PIN_ALL16);
-    GPIO_setAsOutputPin(GPIO_PORT_PF, GPIO_PIN_ALL16);
-
     GPIO_setOutputLowOnPin(GPIO_PORT_PA, GPIO_PIN_ALL16);
     GPIO_setOutputLowOnPin(GPIO_PORT_PB, GPIO_PIN_ALL16);
     GPIO_setOutputLowOnPin(GPIO_PORT_PC, GPIO_PIN_ALL16);
     GPIO_setOutputLowOnPin(GPIO_PORT_PD, GPIO_PIN_ALL16);
     GPIO_setOutputLowOnPin(GPIO_PORT_PE, GPIO_PIN_ALL16);
     GPIO_setOutputLowOnPin(GPIO_PORT_PF, GPIO_PIN_ALL16);
+
+    GPIO_setAsOutputPin(GPIO_PORT_PA, GPIO_PIN_ALL16);
+    GPIO_setAsOutputPin(GPIO_PORT_PB, GPIO_PIN_ALL16);
+    GPIO_setAsOutputPin(GPIO_PORT_PC, GPIO_PIN_ALL16);
+    GPIO_setAsOutputPin(GPIO_PORT_PD, GPIO_PIN_ALL16);
+    GPIO_setAsOutputPin(GPIO_PORT_PE, GPIO_PIN_ALL16);
+    GPIO_setAsOutputPin(GPIO_PORT_PF, GPIO_PIN_ALL16);
 }
 
 

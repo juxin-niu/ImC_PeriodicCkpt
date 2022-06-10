@@ -11,12 +11,12 @@
 //!                         TIMER_A_CLOCKSOURCE_DIVIDER_10
 //!                         TIMER_A_CLOCKSOURCE_DIVIDER_64
 
-void __timer_init();
+void timer_init();
 
-void __timer_start_count();
+void timer_start_count();
 
-void __timer_end_count();
+void timer_end_count();
 
-uint32_t __timer_get_cycles();
+uint32_t timer_get_cycles();
 
 #endif /* IMC_ANALYSIS_TIME_MEAS_H_ */

@@ -12,38 +12,33 @@
 #include <stdio.h>
 #include <tasked_app/tasked_app.h>
 
-__nv bool rlt = false;
+/* ar_regist, bc_regist, cem_regist, crc_regist,
+ * cuckoo_regist, dijkstra_regist, rsa_regist, sort_regist */
+
+__nv uint16_t first_run = 1;
 
 int main()
 {
     power_on_init();
     clock_sys_init();
     dma_init();
+    // __uart_init();
+    // timer_init();
 
-    __uart_init();
-    __timer_init();
-
-    GPIO_setOutputHighOnPin(LED_GREEN_PORT, LED_GREEN_PIN);
-
-
-
-//    sort_regist();
-//    crc_regist();
-//    dijkstra_regist();
-//    crc_regist();
-//    cem_regist();
-//    bc_regist();
-//    rsa_regist();
-    ar_regist();
-
-    while (1) {
-        rlt = scheduler_main();
+    if (first_run == 1) {
+        ar_regist();
+        first_run = 0;
+        P1OUT |= BIT4; __delay_cycles(5); P1OUT &= ~BIT4;
     }
 
-    GPIO_setOutputHighOnPin(GPIO_PORT_P1, GPIO_PIN2);
+    scheduler_main();
 
+    P1OUT |= BIT5; __delay_cycles(5); P1OUT &= ~BIT5;
+    first_run = 1;
 }
 
 void error_detected() {
     GPIO_setOutputHighOnPin(LED_RED_PORT, LED_RED_PIN);
 }
+
+

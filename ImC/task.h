@@ -6,6 +6,7 @@
 
 typedef uint8_t TASKID;
 typedef TASKID (*TASKFUNC)();
+typedef void (*TASKREGFUNC)();
 
 #define __SHARED_VAR(...) \
         typedef struct { __VA_ARGS__ } FRAM_data_t  __attribute__ ((aligned (2))); \

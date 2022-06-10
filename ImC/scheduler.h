@@ -8,7 +8,6 @@
 #include <stdbool.h>
 
 #define TASKED_APP_SELF_CHECK_MODE         1
-#define TASKED_APP_ENERGY_BUDGET_MODE      1
 
 #define TASK_QUE_SIZE       20
 #define BACKUP_BUF_SIZE     128
