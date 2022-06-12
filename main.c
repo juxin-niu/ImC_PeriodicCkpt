@@ -6,6 +6,8 @@
 #include <ImC/task.h>
 #include <ImC/analysis/io.h>
 #include <ImC/analysis/time_meas.h>
+#include <ImC/analysis/hamming8.h>
+#include <ImC/analysis/uart2target.h>
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -16,25 +18,32 @@
  * cuckoo_regist, dijkstra_regist, rsa_regist, sort_regist */
 
 __nv uint16_t first_run = 1;
+__nv bool scheduler_done = 0;
 
 int main()
 {
     power_on_init();
     clock_sys_init();
     dma_init();
-    // __uart_init();
-    // timer_init();
+    uart2target_init();
 
     if (first_run == 1) {
         ar_regist();
         first_run = 0;
-        P1OUT |= BIT4; __delay_cycles(5); P1OUT &= ~BIT4;
     }
 
-    scheduler_main();
+    while (1) {
+        if (scheduler_done != true) {
+            EUSCI_A_UART_transmitData(UART_BASEADDR, hamming_enc(0x0));
+            scheduler_done = scheduler_main();
+        }
+        else {
+            EUSCI_A_UART_transmitData(UART_BASEADDR, hamming_enc(0x1));
+            scheduler_done = 0;
+        }
 
-    P1OUT |= BIT5; __delay_cycles(5); P1OUT &= ~BIT5;
-    first_run = 1;
+    }
+
 }
 
 void error_detected() {

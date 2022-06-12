@@ -7,7 +7,7 @@
 #include <ImC/analysis/energy_budget.h>
 #include <stdbool.h>
 
-#define TASKED_APP_SELF_CHECK_MODE         1
+#define TASKED_APP_SELF_CHECK_MODE         0
 
 #define TASK_QUE_SIZE       20
 #define BACKUP_BUF_SIZE     128

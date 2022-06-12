@@ -239,5 +239,5 @@ void bc_regist()
     task_regist(8, Bit_Shifter,     true );
     task_regist(9, finish,          false);
 
-    WAR_REGIST(2);
+    WAR_REGIST(11);
 }

@@ -26,12 +26,15 @@
 #endif
 
 #if defined(__MSP430FR5969__)
-    #define TESTBENCH_START_PORT    GPIO_PORT_P1
-    #define TESTBENCH_START_PIN     GPIO_PIN4
-    #define TESTBENCH_FINISH_PORT   GPIO_PORT_P1
-    #define TESTBENCH_FINISH_PIN    GPIO_PIN5
+    #define UART_TX_PORT            GPIO_PORT_P2
+    #define UART_TX_PIN             GPIO_PIN5
+    #define UART_TX_FUNCTION        GPIO_SECONDARY_MODULE_FUNCTION
+    #define UART_BASEADDR           EUSCI_A1_BASE
 #elif defined(__MSP430FR5994__)
-
+    #define UART_TX_PORT            GPIO_PORT_P6
+    #define UART_TX_PIN             GPIO_PIN0
+    #define UART_TX_FUNCTION        GPIO_PRIMARY_MODULE_FUNCTION
+    #define UART_BASEADDR           EUSCI_A3_BASE
 #elif defined(__MSP430FR2433__)
 
 #endif

@@ -30,7 +30,7 @@ int fputs(const char *_ptr, register FILE *_fp)
  * The backchannel UART is the UART on eUSCI_A0.
  *                              ---- LaunchPad Development Kit 2.2.4
  */
-void __uart_init()
+void io_uart_init()
 {
     EUSCI_A_UART_initParam param = {0};
     param.selectClockSource = EUSCI_A_UART_CLOCKSOURCE_SMCLK;   /* Use SMCLK */
