@@ -9,8 +9,8 @@
 
 #define TASKED_APP_SELF_CHECK_MODE         0
 
-#define TASK_QUE_SIZE       20
-#define BACKUP_BUF_SIZE     128
+#define TASK_QUE_SIZE       15
+#define BACKUP_BUF_SIZE     256
 
 void task_regist(TASKID id, TASKFUNC name, bool backup);
 void war_regist(void* src, uint16_t size);

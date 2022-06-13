@@ -17,12 +17,12 @@ typedef struct {
     uint16_t prev;
 } dijkstra_queue_t;
 
-#define DIJKSTRA_NNODES             30
+#define DIJKSTRA_NNODES             20
 #define DIJKSTRA_QSIZE              4 * DIJKSTRA_NNODES
 #define DIJKSTRA_INFINITY           0xFFFF
 #define DIJKSTRA_UNDEFINED          0xFFFF
 
-const uint16_t dijkstra_check[DIJKSTRA_NNODES][2] = {
+const uint16_t dijkstra_check[DIJKSTRA_NNODES][2] = {   // TODO: Out of date.
       {0xFFFF, 0}, {13, 22}, {4, 15}, {15, 15}, {0, 7}, {19, 22},
       {12, 14}, {12, 17}, {12, 20}, {18, 30}, {14, 20}, {28, 8},
       {28, 12}, {28, 17}, {28, 6}, {11, 15}, {5, 24}, {0, 14},

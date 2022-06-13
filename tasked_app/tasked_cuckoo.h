@@ -4,7 +4,7 @@
 
 #include <stdint.h>
 
-#define CUCKOO_NUM_BUCKETS          64                          // must be a power of 2
+#define CUCKOO_NUM_BUCKETS          128                          // must be a power of 2
 #define CUCKOO_NUM_INSERTS          (CUCKOO_NUM_BUCKETS / 4)    // shoot for 25% occupancy
 #define CUCKOO_NUM_LOOKUPS          CUCKOO_NUM_INSERTS
 #define CUCKOO_MAX_RELOCATIONS      8

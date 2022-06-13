@@ -10,9 +10,9 @@
 
 #define AR_NUM_WARMUP_SAMPLES   3       // Number of samples to discard before recording training set
 #define AR_ACCEL_WINDOW_SIZE    3
-#define AR_MODEL_SIZE           5
+#define AR_MODEL_SIZE           4
 #define AR_SAMPLE_NOISE_FLOOR   10      // Made up value
-#define AR_SAMPLES_TO_COLLECT   64      // Number of classifications to complete in one experiment
+#define AR_SAMPLES_TO_COLLECT   40      // Number of classifications to complete in one experiment
 
 typedef threeAxis_t_8 accelReading;
 typedef accelReading accelWindow[AR_ACCEL_WINDOW_SIZE];
@@ -35,7 +35,7 @@ typedef enum {
     MODE_RECOGNIZE = 0, // default
 } ar_run_mode_t;
 
-const uint16_t stationary_checkrlt[4] = {43, 64, 79, 79};
-const uint16_t moving_checkrlt[4] = {56, 35, 20, 20};
+const uint16_t stationary_checkrlt[4] = {43, 64, 79, 79};   // TODO: Out of date
+const uint16_t moving_checkrlt[4] = {56, 35, 20, 20};       // TODO: Out of date
 
 #endif /* TASKED_APP_TASKED_AR_H_ */

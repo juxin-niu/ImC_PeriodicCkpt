@@ -93,7 +93,7 @@ inline uint8_t RSA_isPrime(uint16_t x, uint16_t sqrt_x)
 
 __TASK_ENTRY(init,
 
-const uint16_t p = 7, q = 11;
+const uint16_t p = 11, q = 13;
 __GET(public_n) = p * q;
 __GET(phi_n) = (p - 1) * (q - 1);
 __GET(candidate_e) = p + q - 1;
