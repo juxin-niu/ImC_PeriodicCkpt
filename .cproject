@@ -98,7 +98,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="lib/driverlib_MSP430FR2xx_4xx|lnk_msp430fr2433.cmd|lib/math_lib/accel.c|lnk_msp430fr5994.cmd|preset.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="lib/driverlib_MSP430FR2xx_4xx|lnk_msp430fr2433.cmd|lib/math_lib/accel.c|lnk_msp430fr5994.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
