@@ -4,11 +4,11 @@
 
 #include <stdint.h>
 
-#define CUCKOO_NUM_BUCKETS          128                          // must be a power of 2
-#define CUCKOO_NUM_INSERTS          (CUCKOO_NUM_BUCKETS / 4)    // shoot for 25% occupancy
+#define CUCKOO_NUM_BUCKETS          256                             // must be a power of 2
+#define CUCKOO_NUM_INSERTS          (CUCKOO_NUM_BUCKETS / 2)        // shoot for 25% occupancy
 #define CUCKOO_NUM_LOOKUPS          CUCKOO_NUM_INSERTS
 #define CUCKOO_MAX_RELOCATIONS      8
-#define CUCKOO_BUFFER_SIZE          32
+#define CUCKOO_BUFFER_SIZE          128
 
 typedef uint16_t cuckoo_value_t;
 typedef uint16_t cuckoo_hash_t;
@@ -35,13 +35,5 @@ typedef enum{
 
 // seeds the pseudo-random sequence of keys
 static const cuckoo_value_t cuckoo_init_key = 0x0001;
-
-uint16_t cuckoo_checkrlt[CUCKOO_NUM_BUCKETS] = {
-    32128, 0, 0, 31939, 0, 0, 0, 0, 29690, 0, -31488,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31638, 0, 0, 0,
-    0, 0, 29276, 28327, 0, 32223, 0, 31453, 0, 0, 0,
-    0, 0, -32409, 0, 0, -30614, 0, 0, 0, 30958, 0, 0,
-    0, 0, 0, 0, 0, 28342, 0, -30984, 0, 29946, 0, 0, 0, 0, -32129
-};
 
 #endif /* TASKED_APP_TASKED_CUCKOO_H_ */

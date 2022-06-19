@@ -212,30 +212,11 @@ if (__GET(_v_lookup_count) < CUCKOO_NUM_LOOKUPS)
 }
 else
 {
-   if (TASKED_APP_SELF_CHECK_MODE){
-       __GET(_v_index) = 0;
-       return 9;
-   } else return TASK_FINISH;
+    return TASK_FINISH;
 }
 
 )
 
-
-__TASK(9, finish,
-
-while (__GET(_v_index) != CUCKOO_NUM_BUCKETS) {
-
-    if (__GET(_v_filter[__GET(_v_index)]) != cuckoo_checkrlt[__GET(_v_index)]) {
-        error_detected();
-        while (1){}
-    }
-
-    __GET(_v_index)++;
-}
-
-return TASK_FINISH;
-
-)
 
 void cuckoo_regist()
 {
@@ -248,7 +229,5 @@ void cuckoo_regist()
     task_regist(6, Relocate,            true );
     task_regist(7, Insert_Done,         true );
     task_regist(8, Lookup_Search,       true );
-    task_regist(9, finish,              false);
-
     WAR_REGIST(CUCKOO_NUM_BUCKETS + 9);
 }

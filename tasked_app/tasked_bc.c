@@ -67,10 +67,7 @@ case 3:     return 5;
 case 4:     return 6;
 case 5:     return 7;
 case 6:     return 8;
-default:    {
-    if (TASKED_APP_SELF_CHECK_MODE) return 9;
-    else return TASK_FINISH;
-    }
+default:    return TASK_FINISH;
 }
 
 )
@@ -208,23 +205,6 @@ else
    return 1;
 )
 
-__TASK(9, finish,
-
-if (    __GET(_v_n_0) != __GET(_v_n_1) ||
-        __GET(_v_n_1) != __GET(_v_n_2) ||
-        __GET(_v_n_2) != __GET(_v_n_3) ||
-        __GET(_v_n_3) != __GET(_v_n_4) ||
-        __GET(_v_n_4) != __GET(_v_n_5) ||
-        __GET(_v_n_5) != __GET(_v_n_6) ||
-        __GET(_v_n_6) != __GET(_v_n_0)
-    ) {
-        error_detected();
-        while(1){}
-    }
-
-return TASK_FINISH;
-
-)
 
 void bc_regist()
 {
@@ -237,7 +217,6 @@ void bc_regist()
     task_regist(6, BW_BTBL,         true );
     task_regist(7, AR_BTBL,         true );
     task_regist(8, Bit_Shifter,     true );
-    task_regist(9, finish,          false);
 
     WAR_REGIST(11);
 }

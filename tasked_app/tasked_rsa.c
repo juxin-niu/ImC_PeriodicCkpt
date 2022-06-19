@@ -156,28 +156,11 @@ __GET(dec_plain[i]) =
 if (__GET(dec_index) < RSA_MSGLENGTH)
    return 4;
 else {
-    if (TASKED_APP_SELF_CHECK_MODE){
-        __GET(dec_index) = 0;
-        return 6;
-    } else return TASK_FINISH;
+    return TASK_FINISH;
 }
 
 )
 
-__TASK(6, finish,
-
-while (__GET(dec_index) != RSA_MSGLENGTH) {
-    uint16_t expected = msgPtr[__GET(dec_index)] % __GET(public_n);
-    if (__GET(dec_plain[__GET(dec_index)]) != expected) {
-        error_detected();
-        while(1){}
-    }
-    __GET(dec_index)++;
-}
-
-return TASK_FINISH;
-
-)
 
 
 void rsa_regist()
@@ -189,7 +172,6 @@ void rsa_regist()
     task_regist(3, enc_main,            true );
     task_regist(4, calculate_d_main,    false);
     task_regist(5, dec_main,            true );
-    task_regist(6, finish,              false);
 
     WAR_REGIST(4);
 }

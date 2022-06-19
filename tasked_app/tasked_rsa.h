@@ -7,7 +7,7 @@
 
 
 #define RSA_MSG          "A bosom friend afar brings a distant land near!"
-#define RSA_MSGLENGTH    (15)
+#define RSA_MSGLENGTH    (30)
 
 
 

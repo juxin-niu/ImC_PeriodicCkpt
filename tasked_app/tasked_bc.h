@@ -5,7 +5,7 @@
 #include <stdint.h>
 
 #define BITCOUNT_SEED               4L
-#define BITCOUNT_ITER               100
+#define BITCOUNT_ITER               128
 #define BITCOUNT_CHARBIT            8
 
 const static uint8_t bits[256] =

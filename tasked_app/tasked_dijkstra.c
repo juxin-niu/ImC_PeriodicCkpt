@@ -59,10 +59,7 @@ if (__GET(enq_idx) != i)
    return 2;
 }
 else {
-    if (TASKED_APP_SELF_CHECK_MODE) {
-        __GET(node_idx) = 0;
-        return 3;
-    } else return TASK_FINISH;
+    return TASK_FINISH;
 }
 
 )
@@ -105,31 +102,12 @@ else
 
 )
 
-__TASK(3, finish,
-
-while (__GET(node_idx) != DIJKSTRA_NNODES) {
-    if (__GET(node_list[__GET(node_idx)].prev) != dijkstra_check[__GET(node_idx)][0]) {
-        error_detected();
-        while(1){}
-    }
-    if (__GET(node_list[__GET(node_idx)].dist) != dijkstra_check[__GET(node_idx)][1]) {
-        error_detected();
-        while(1){}
-    }
-    __GET(node_idx)++;
-}
-
-return TASK_FINISH;
-
-)
-
 
 void dijkstra_regist()
 {
     task_regist(0, init,                false);
     task_regist(1, Nearest_Node_Sel,    true );
     task_regist(2, Shorter_Path_Find,   true );
-    task_regist(3, finish,              false);
 
     WAR_REGIST(2 * DIJKSTRA_NNODES + 3);
 }

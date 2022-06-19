@@ -7,10 +7,12 @@
 #include <ImC/analysis/energy_budget.h>
 #include <stdbool.h>
 
-#define TASKED_APP_SELF_CHECK_MODE         0
+#define TASK_QUE_SIZE       12
+#define BACKUP_BUF_SIZE     280
 
-#define TASK_QUE_SIZE       15
-#define BACKUP_BUF_SIZE     256
+#define BACKUP_USE_DMA
+//!    -BACKUP_USE_CPU
+//!    -BACKUP_USE_DMA
 
 void task_regist(TASKID id, TASKFUNC name, bool backup);
 void war_regist(void* src, uint16_t size);

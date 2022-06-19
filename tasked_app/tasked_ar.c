@@ -56,13 +56,7 @@ __TASK(1, Select_Mode,
        volatile uint16_t pin_state = MODE_TRAIN_MOVING;  // 1
        __GET(_v_count)++;
 
-       if(__GET(_v_count) >= 7){
-           if (TASKED_APP_SELF_CHECK_MODE){
-               __GET(_v_count) = 0;
-               return 9;
-           }
-           else return TASK_FINISH;
-       }
+       if(__GET(_v_count) >= 7)             return TASK_FINISH;
        else if(__GET(_v_count) >= 3)       pin_state = MODE_RECOGNIZE;        // 0
        else if(__GET(_v_count) >= 2)       pin_state = MODE_TRAIN_STATIONARY; // 2
 
@@ -321,26 +315,6 @@ __TASK(8, AR_Train,
 )
 
 
-__TASK(9, finish,
-
-while (__GET(_v_count) != 4) {
-    uint16_t i = __GET(_v_count);
-        printf("<%d %d> ", __GET(resultStationaryPct[i]), __GET(resultMovingPct[i]));
-    if (__GET(resultStationaryPct[i]) != stationary_checkrlt[i] ||
-            __GET(resultMovingPct[i]) != moving_checkrlt[i] ||
-            __GET(sum[i]) != AR_SAMPLES_TO_COLLECT ) {
-
-        error_detected();
-        while(1){}
-    }
-    __GET(_v_count)++;
-}
-
-return TASK_FINISH;
-
-)
-
-
 void ar_regist()
 {
     task_regist(0, init,            false);
@@ -352,7 +326,6 @@ void ar_regist()
     task_regist(6, AR_Stats,        true );
     task_regist(7, Warm_Up,         true );
     task_regist(8, AR_Train,        true );
-    task_regist(9, finish,          false);
 
     WAR_REGIST(10);
 }

@@ -211,33 +211,13 @@ __TASK(9, AppendCompressed,
 __GET(_v_compressed_data[__GET(_v_out_len)].letter) = __GET(_v_symbol);
 __GET(_v_out_len)++;
 if(__GET(_v_out_len) == CEM_BLOCK_SIZE) {
-    if (TASKED_APP_SELF_CHECK_MODE) {
-        __GET(_v_letter_idx) = 0;
-        return 10;
-    } else return TASK_FINISH;
+    return TASK_FINISH;
 }
 else
    return 2;
 
 )
 
-__TASK(10, finish,
-
-while (__GET(_v_letter_idx) != CEM_DICT_SIZE) {
-
-    if (__GET(_v_dict[__GET(_v_letter_idx)].letter) != cem_check[__GET(_v_letter_idx)][0] ||
-            __GET(_v_dict[__GET(_v_letter_idx)].sibling) != cem_check[__GET(_v_letter_idx)][1] ||
-            __GET(_v_dict[__GET(_v_letter_idx)].child) != cem_check[__GET(_v_letter_idx)][2])
-    {
-        error_detected();
-        while (1) {}
-    }
-
-    __GET(_v_letter_idx)++;
-}
-return TASK_FINISH;
-
-)
 
 void cem_regist()
 {
@@ -251,7 +231,6 @@ void cem_regist()
     task_regist(7,  Add_Node,            true );
     task_regist(8,  Add_Insert,          true );
     task_regist(9,  AppendCompressed,    true );
-    task_regist(10, finish,              false);
 
     WAR_REGIST(6);
 }

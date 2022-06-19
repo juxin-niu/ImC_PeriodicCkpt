@@ -4,8 +4,6 @@
 #include <ImC/scheduler.h>
 #include <ImC/target.h>
 #include <ImC/task.h>
-#include <ImC/analysis/io.h>
-#include <ImC/analysis/time_meas.h>
 #include <ImC/analysis/hamming8.h>
 #include <ImC/analysis/uart2target.h>
 
@@ -14,19 +12,13 @@
 #include <stdio.h>
 #include <tasked_app/tasked_app.h>
 
-enum {
-    TASK_NONE = 0x01, TASK_RDY = 0x02,
-    TASK_RUN =0x04, TASK_DONE = 0x08
-};
-
+enum { TASK_NONE = 0x01, TASK_RDY = 0x02, TASK_RUN =0x04, TASK_DONE = 0x08 };
 
 __nv uint16_t first_run = 1;
 
 __nv TASKREGFUNC testbench_regfunc[8] =
     {ar_regist, bc_regist, cem_regist, crc_regist,
      cuckoo_regist, dijkstra_regist, rsa_regist, sort_regist};
-
-const uint16_t testbench_runtime[8] = {1, 1, 1, 1, 1, 1, 1, 1};
 
 __nv uint8_t hamming_scode[8] = {};
 __nv uint8_t hamming_ecode[8] = {};
@@ -58,6 +50,9 @@ int main()
             testbench_state[testbench_id] = TASK_RDY;
             break;
         case TASK_RDY:
+            /* transmitData after state_change ensures that
+             * the same signal will not be sent twice,
+             * which ensures the correctness of self-synchronization.  */
             testbench_state[testbench_id] = TASK_RUN;
             EUSCI_A_UART_transmitData(UART_BASEADDR, hamming_scode[testbench_id]);
             /* NO BREAK! */
@@ -71,13 +66,11 @@ int main()
             if (testbench_id >= 8)  testbench_id = 0;
             testbench_state[testbench_id] = TASK_NONE;
             break;
-        default:    P1OUT |= BIT0; break;
+        default:
+            P1OUT |= BIT0;
+            while (1){};
+            break;
         }
     }
 }
-
-void error_detected() {
-    GPIO_setOutputHighOnPin(LED_RED_PORT, LED_RED_PIN);
-}
-
 

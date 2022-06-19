@@ -28,29 +28,15 @@ return 1;
 
 __TASK(1, main,
 
-for (uint16_t i = 0; i < 2; ++i)
-{
-   __GET(SW_Results) = CRCheck_CCITT_Update(__GET(SW_Results), CRC_Input[__GET(cnt)] & 0xFF);
-   __GET(SW_Results) = CRCheck_CCITT_Update(__GET(SW_Results), (CRC_Input[__GET(cnt)] >> 8) & 0xFF);
-   ++__GET(cnt);
-}
+__GET(SW_Results) = CRCheck_CCITT_Update(__GET(SW_Results), CRC_Input[__GET(cnt)] & 0xFF);
+__GET(SW_Results) = CRCheck_CCITT_Update(__GET(SW_Results), (CRC_Input[__GET(cnt)] >> 8) & 0xFF);
+++__GET(cnt);
+
 if(__GET(cnt) < CRC_LENGTH)
    return 1;
 else {
-    if (TASKED_APP_SELF_CHECK_MODE) return 2;
-    else return TASK_FINISH;
+    return TASK_FINISH;
 }
-
-)
-
-__TASK(2, finish,
-
-if (__GET(SW_Results) != CRC_CHECK_RLT) {
-    error_detected();
-   while(1){}
-}
-
-return TASK_FINISH;
 
 )
 
@@ -59,7 +45,6 @@ void crc_regist()
 {
     task_regist(0, init,       false);
     task_regist(1, main,       true );
-    task_regist(2, finish,     false);
 
     WAR_REGIST(2);
 }

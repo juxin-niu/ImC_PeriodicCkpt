@@ -17,20 +17,13 @@ typedef struct {
     uint16_t prev;
 } dijkstra_queue_t;
 
-#define DIJKSTRA_NNODES             20
+#define DIJKSTRA_NNODES             25
 #define DIJKSTRA_QSIZE              4 * DIJKSTRA_NNODES
 #define DIJKSTRA_INFINITY           0xFFFF
 #define DIJKSTRA_UNDEFINED          0xFFFF
 
-const uint16_t dijkstra_check[DIJKSTRA_NNODES][2] = {   // TODO: Out of date.
-      {0xFFFF, 0}, {13, 22}, {4, 15}, {15, 15}, {0, 7}, {19, 22},
-      {12, 14}, {12, 17}, {12, 20}, {18, 30}, {14, 20}, {28, 8},
-      {28, 12}, {28, 17}, {28, 6}, {11, 15}, {5, 24}, {0, 14},
-      {27, 22}, {28, 15}, {6, 15}, {0, 20}, {11, 8}, {2, 17},
-      {14, 20}, {16, 31}, {15, 15}, {4, 17}, {0, 5}, {25, 34}
-};
 
-const uint8_t adj_matrix[50][50] = {
+const uint8_t adj_matrix[DIJKSTRA_NNODES][DIJKSTRA_NNODES] = {
     {52, 58, 21, 41, 7, 51, 29, 90, 93, 38, 95, 26, 96, 72, 42, 92, 81, 14, 27, 85, 77, 20, 49, 27,
      49, 90, 76, 82, 5, 86, 94, 10, 49, 93, 40, 98, 34, 2, 37, 92, 61, 27, 13, 16, 25, 88, 96, 50, 51, 52},
     {92, 53, 8, 66, 33, 29, 85, 6, 26, 91, 42, 42, 80, 18, 89, 35, 17, 86, 2, 99, 56, 93, 11, 79,
