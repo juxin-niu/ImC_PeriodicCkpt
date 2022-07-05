@@ -2,8 +2,8 @@
 #ifndef TASKED_APP_TASKED_APP_H_
 #define TASKED_APP_TASKED_APP_H_
 
+#include <ImC/driverlib_include.h>
 #include <ImC/nv.h>
-#include <ImC/target_spec.h>
 #include <ImC/scheduler.h>
 #include <ImC/target.h>
 #include <ImC/task.h>

@@ -2,11 +2,32 @@
 #ifndef IMC_ANALYSIS_UART2TARGET_H_
 #define IMC_ANALYSIS_UART2TARGET_H_
 
+#include <ImC/driverlib_include.h>
 #include <msp430.h>
-#include <ImC/target_spec.h>
 #include <ImC/target.h>
 #include <stdint.h>
 #include <stdbool.h>
+
+
+#if defined(__MSP430FR5969__)
+    #define UART_TX_PORT            GPIO_PORT_P2
+    #define UART_TX_PIN             GPIO_PIN5
+    #define UART_TX_FUNCTION        GPIO_SECONDARY_MODULE_FUNCTION
+    #define UART_BASEADDR           EUSCI_A1_BASE
+#elif defined(__MSP430FR5994__)
+    #define UART_TX_PORT            GPIO_PORT_P6
+    #define UART_TX_PIN             GPIO_PIN0
+    #define UART_TX_FUNCTION        GPIO_PRIMARY_MODULE_FUNCTION
+    #define UART_BASEADDR           EUSCI_A3_BASE
+#elif defined(__MSP430FR2433__)
+    #define UART_TX_PORT            GPIO_PORT_P2
+    #define UART_TX_PIN             GPIO_PIN6
+    #define UART_TX_FUNCTION        GPIO_PRIMARY_MODULE_FUNCTION
+    #define UART_BASEADDR           EUSCI_A1_BASE
+#else
+#error "ERROR: UNSUPPORTED MSP TARGET!"
+#endif
+
 
 #if WORKING_FREQUENCY_IN_MHZ == 1
 #define CLK_PRESCALAR_USED          8

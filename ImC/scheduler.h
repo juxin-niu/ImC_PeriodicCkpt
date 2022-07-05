@@ -4,7 +4,6 @@
 
 #include <ImC/nv.h>
 #include <ImC/task.h>
-#include <ImC/analysis/energy_budget.h>
 #include <stdbool.h>
 
 #define TASK_QUE_SIZE       12

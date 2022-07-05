@@ -18,7 +18,6 @@ uint16_t enc_cipher[RSA_MSGLENGTH];
 uint16_t dec_plain[RSA_MSGLENGTH];
 )
 
-const uint8_t* msgPtr = RSA_MSG;
 
 inline uint16_t RSA_PowerMod(uint16_t a, uint16_t b, uint16_t mod)
 {
@@ -93,7 +92,6 @@ inline uint8_t RSA_isPrime(uint16_t x, uint16_t sqrt_x)
 
 __TASK_ENTRY(init,
 
-const uint16_t p = 11, q = 13;
 __GET(public_n) = p * q;
 __GET(phi_n) = (p - 1) * (q - 1);
 __GET(candidate_e) = p + q - 1;
@@ -131,7 +129,7 @@ __TASK(3, enc_main,
 
 uint16_t i = __GET(enc_index)++;
 __GET(enc_cipher[i]) =
-       RSA_PowerMod(msgPtr[i], __GET(public_e[i]), __GET(public_n));
+       RSA_PowerMod(rsa_msg[i], __GET(public_e[i]), __GET(public_n));
 
 if (__GET(enc_index) < RSA_MSGLENGTH)
     return 3;

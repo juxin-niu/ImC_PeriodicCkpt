@@ -1,11 +1,12 @@
 
 #include <ImC/nv.h>
-#include <ImC/target_spec.h>
 #include <ImC/scheduler.h>
 #include <ImC/target.h>
 #include <ImC/task.h>
 #include <ImC/analysis/hamming8.h>
 #include <ImC/analysis/uart2target.h>
+#include <ImC/driverlib_include.h>
+#include <ImC/led_button.h>
 
 #include <stdint.h>
 #include <stdbool.h>
@@ -15,6 +16,7 @@
 enum { TASK_NONE = 0x01, TASK_RDY = 0x02, TASK_RUN =0x04, TASK_DONE = 0x08 };
 
 __nv uint16_t first_run = 1;
+
 
 __nv TASKREGFUNC testbench_regfunc[8] =
     {ar_regist, bc_regist, cem_regist, crc_regist,
@@ -39,9 +41,20 @@ int main()
             hamming_ecode[i] = hamming_enc(2 * i + 1);
             testbench_state[i] = TASK_NONE;
         }
+
+        // Wait until pressing left button.
+        turn_on_green_led;
+        left_button_init;
+        while (!check_button_press) {/* empty */}
+        left_button_disable;
+        turn_off_green_led;
+
         first_run = 0;
     }
 
+    // TODO: for finite times running:
+    // static __nv uint16_t repeat_time;
+    // while (repeat_time--) { /* scheduler */ }
     while (1) {
         switch(testbench_state[testbench_id])
         {
@@ -65,10 +78,6 @@ int main()
             testbench_id++;
             if (testbench_id >= 8)  testbench_id = 0;
             testbench_state[testbench_id] = TASK_NONE;
-            break;
-        default:
-            P1OUT |= BIT0;
-            while (1){};
             break;
         }
     }
