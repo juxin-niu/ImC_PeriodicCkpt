@@ -18,25 +18,4 @@
 2. Include `CCS_PROJECT/lib/driverlib_MSP430FR2xx_3xx` from build.
 3. Change Device to `MSP430FR2433` (`Project Explorer -> Properties -> General(Project) -> Device` ).
 
-**Change Working Clock Frequency**
-
-At `CCS_PROJECT/ImC/target.h`:
-
-```c
-#define WORKING_FREQUENCY_IN_MHZ    8
-//!                                -1 (in 1MHz)
-//!                                -2 (in 2MHz)
-//!                                -4 (in 4MHz)
-//!                                -8 (in 8MHz)
-```
-
-**Change Backup Scheme**
-
-At `CCS_PROJECT/ImC/scheduler.h`:
-
-```c
-#define BACKUP_USE_DMA
-//!    -BACKUP_USE_CPU
-//!    -BACKUP_USE_DMA
-```
 
