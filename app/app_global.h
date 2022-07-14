@@ -78,7 +78,7 @@ typedef struct {
     cem_index_t child;   // link-list of children
 } cem_node_t;
 
-extern inline cem_sample_t CEM_AcquireSample(cem_letter_t prev_sample);
+extern cem_sample_t CEM_AcquireSample(cem_letter_t prev_sample);
 
 // ==================================================== CRC  ==================================================== //
 
@@ -87,7 +87,7 @@ extern inline cem_sample_t CEM_AcquireSample(cem_letter_t prev_sample);
 
 extern const uint16_t CRC_Input[CRC_LENGTH];
 
-extern inline uint16_t CRCheck_CCITT_Update(uint16_t init, uint16_t input);
+extern uint16_t CRCheck_CCITT_Update(uint16_t init, uint16_t input);
 
 // =================================================== CUCKOO  ================================================== //
 
@@ -123,9 +123,9 @@ typedef enum{
 // seeds the pseudo-random sequence of keys
 extern const cuckoo_value_t cuckoo_init_key;
 
-extern inline cuckoo_index_t CUCKOO_Hash2Index(cuckoo_fingerprint_t fp);
+extern cuckoo_index_t CUCKOO_Hash2Index(cuckoo_fingerprint_t fp);
 
-extern inline cuckoo_fingerprint_t CUCKOO_Hash2Fingerprint(cuckoo_value_t key);
+extern cuckoo_fingerprint_t CUCKOO_Hash2Fingerprint(cuckoo_value_t key);
 
 // ================================================== DIJKSTRA  ================================================== //
 
@@ -157,10 +157,10 @@ extern const uint16_t q;
 
 #define RSA_MSGLENGTH    (30)
 
-extern inline uint16_t RSA_PowerMod(uint16_t a, uint16_t b, uint16_t mod);
-extern inline uint16_t RSA_Sqrt16(uint16_t x);
-extern inline uint16_t RSA_ModInv(uint16_t u, uint16_t v);
-extern inline uint8_t RSA_isPrime(uint16_t x, uint16_t sqrt_x);
+extern uint16_t RSA_PowerMod(uint16_t a, uint16_t b, uint16_t mod);
+extern uint16_t RSA_Sqrt16(uint16_t x);
+extern uint16_t RSA_ModInv(uint16_t u, uint16_t v);
+extern uint8_t RSA_isPrime(uint16_t x, uint16_t sqrt_x);
 
 // ==================================================== SORT  ===================================================== //
 

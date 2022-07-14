@@ -32,13 +32,13 @@ int Bitcount_NonRecursiveCnt(uint32_t x)
     return cnt;
 }
 
-inline cem_sample_t CEM_AcquireSample(cem_letter_t prev_sample)
+cem_sample_t CEM_AcquireSample(cem_letter_t prev_sample)
 {
     cem_letter_t sample = (prev_sample + 1) & 0x03;
     return sample;
 }
 
-inline uint16_t CRCheck_CCITT_Update(uint16_t init, uint16_t input)
+uint16_t CRCheck_CCITT_Update(uint16_t init, uint16_t input)
 {
     uint16_t CCITT = (uint8_t) (init >> 8) | (init << 8);
     CCITT ^= input;
@@ -48,7 +48,7 @@ inline uint16_t CRCheck_CCITT_Update(uint16_t init, uint16_t input)
     return CCITT;
 }
 
-inline cuckoo_hash_t CUCKOO_DjbHash(uint8_t* data, uint16_t len)
+cuckoo_hash_t CUCKOO_DjbHash(uint8_t* data, uint16_t len)
 {
     uint16_t hash = 5381;
     uint16_t i;
@@ -59,18 +59,18 @@ inline cuckoo_hash_t CUCKOO_DjbHash(uint8_t* data, uint16_t len)
     return hash & 0xFFFF;
 }
 
-inline cuckoo_index_t CUCKOO_Hash2Index(cuckoo_fingerprint_t fp)
+cuckoo_index_t CUCKOO_Hash2Index(cuckoo_fingerprint_t fp)
 {
     cuckoo_hash_t hash = CUCKOO_DjbHash((uint8_t *) &fp, sizeof(cuckoo_fingerprint_t));
     return hash & (CUCKOO_NUM_BUCKETS - 1); // NUM_BUCKETS must be power of 2
 }
 
-inline cuckoo_fingerprint_t CUCKOO_Hash2Fingerprint(cuckoo_value_t key)
+cuckoo_fingerprint_t CUCKOO_Hash2Fingerprint(cuckoo_value_t key)
 {
     return CUCKOO_DjbHash((uint8_t *) &key, sizeof(cuckoo_value_t));
 }
 
-inline uint16_t RSA_PowerMod(uint16_t a, uint16_t b, uint16_t mod)
+uint16_t RSA_PowerMod(uint16_t a, uint16_t b, uint16_t mod)
 {
     uint16_t ans = 1;
     a = a % mod;
@@ -84,7 +84,7 @@ inline uint16_t RSA_PowerMod(uint16_t a, uint16_t b, uint16_t mod)
 }
 
 /* Square root by Newton's method. This code is from InK */
-inline uint16_t RSA_Sqrt16(uint16_t x)
+uint16_t RSA_Sqrt16(uint16_t x)
 {
     uint16_t hi = 0xffff;
     uint16_t lo = 0;
@@ -105,7 +105,7 @@ inline uint16_t RSA_Sqrt16(uint16_t x)
 
 
 /* https://www.di-mgt.com.au/euclidean.html#extendedeuclidean */
-inline uint16_t RSA_ModInv(uint16_t u, uint16_t v)
+uint16_t RSA_ModInv(uint16_t u, uint16_t v)
 {
     uint16_t inv, u1, u3, v1, v3, t1, t3, q;
     int16_t iter;
@@ -129,7 +129,7 @@ inline uint16_t RSA_ModInv(uint16_t u, uint16_t v)
     return inv;
 }
 
-inline uint8_t RSA_isPrime(uint16_t x, uint16_t sqrt_x)
+uint8_t RSA_isPrime(uint16_t x, uint16_t sqrt_x)
 {
     uint16_t i;
     for (i = 3; i <= sqrt_x; i += 2)
